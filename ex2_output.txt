@@ -1,0 +1,42 @@
+hidden: 2, bridge: True, learning_rate: 0.1
+Successful training, stopped at epoc = 4385 with a validation loss of 0.19999167
+Successful training, stopped at epoc = 4385 with a validation loss of 0.19999167
+Successful training, stopped at epoc = 4385 with a validation loss of 0.19999167
+-------------------------------------------------------------------------------------
+hidden: 2, bridge: True, learning_rate: 0.01
+Failed training, reached 40,000 epocs with a validation loss of 0.21057247
+Failed training, reached 40,000 epocs with a validation loss of 0.21057247
+Failed training, reached 40,000 epocs with a validation loss of 0.21057247
+-------------------------------------------------------------------------------------
+hidden: 4, bridge: True, learning_rate: 0.1
+Successful training, stopped at epoc = 4027 with a validation loss of 0.19998258
+Successful training, stopped at epoc = 4027 with a validation loss of 0.19998258
+Successful training, stopped at epoc = 4027 with a validation loss of 0.19998258
+-------------------------------------------------------------------------------------
+hidden: 4, bridge: True, learning_rate: 0.01
+Failed training, reached 40,000 epocs with a validation loss of 0.20078743
+Failed training, reached 40,000 epocs with a validation loss of 0.20078743
+Failed training, reached 40,000 epocs with a validation loss of 0.20078743
+-------------------------------------------------------------------------------------
+hidden: 2, bridge: False, learning_rate: 0.1
+Failed training, reached 40,000 epocs with a validation loss of 6.422649
+Failed training, reached 40,000 epocs with a validation loss of 6.422649
+Failed training, reached 40,000 epocs with a validation loss of 6.422649
+-------------------------------------------------------------------------------------
+hidden: 2, bridge: False, learning_rate: 0.01
+Failed training, reached 40,000 epocs with a validation loss of 6.43176
+Failed training, reached 40,000 epocs with a validation loss of 6.43176
+Failed training, reached 40,000 epocs with a validation loss of 6.43176
+-------------------------------------------------------------------------------------
+hidden: 4, bridge: False, learning_rate: 0.1
+Successful training, stopped at epoc = 21576 with a validation loss of 0.13367486
+Successful training, stopped at epoc = 21576 with a validation loss of 0.13367486
+Successful training, stopped at epoc = 21576 with a validation loss of 0.13367486
+-------------------------------------------------------------------------------------
+hidden: 4, bridge: False, learning_rate: 0.01
+Failed training, reached 40,000 epocs with a validation loss of 6.4304442
+Failed training, reached 40,000 epocs with a validation loss of 6.4304442
+Failed training, reached 40,000 epocs with a validation loss of 6.4304442
+-------------------------------------------------------------------------------------
+Successful training, stopped at epoc = 13266 with a validation loss of 0.19999336
+ Eden Dupont 204808596 Exercise 2 
