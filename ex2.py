@@ -3,6 +3,7 @@ import numpy as np
 import copy
 import random
 from datetime import datetime
+import matplotlib.pyplot as plt
 
 # EDEN DUPONT 204808596 EX2
 
@@ -13,6 +14,12 @@ MAX_MINIMAL_CHANGES = 10
 MINIMAL_CHANGE = 0.0001
 NUM_SUCCESSFUL_EXPERIMENTS = 10
 temperature = 0.5
+
+graph_mean_epoch = []
+graph_epoch_std = []
+graph_num_layers = []
+graph_rate = []
+graph_bridge = []
 
 
 # INPUTS:
@@ -94,10 +101,12 @@ def xor(file, training_data, validation_data, hidden, bridge, learning_rate):
     curr_w1, curr_w2, curr_b1, curr_b2, curr_loss = sess.run([w1, w2, b1, b2, loss],
                                                              {x_input_node: x_validation_data, target: y_validation})
     train_loss = sess.run(loss, {x_input_node: x_training_data, target: y_training})
-    if hidden == 1 and bridge is True:
-        hidden_output = sess.run(tf.sigmoid(tf.matmul(z_sig1, [w2[0]]) / temperature), {x_input_node: x_training_data})
-        printf(file, "x: " + str(x_training_data))
-        printf(file, "hidden layer output: " + str(hidden_output))
+    if hidden == 1 and bridge is True:  # print output of hidden layer alongside the input
+        hlayer_out = tf.sigmoid(tf.matmul(z_sig1 + b1, [w2[0]]) / temperature)
+        hidden_output = sess.run(hlayer_out, {x_input_node: x_training_data})
+
+        printf(file, "x_input: " + str(x_training_data))
+        printf(file, "hlayer_output: " + str(hidden_output.tolist()))
     return curr_w1, curr_w2, curr_b1, curr_b2, curr_loss, success_flag, epoch, validation_loss, train_loss
 
 
@@ -127,6 +136,12 @@ def experiment(f, training, validation, hidden, bridge, rate, exp_counter):
     train_loss_mean = np.mean(train_losses)
     train_loss_std = np.std(train_losses)
 
+    graph_mean_epoch.append(float(epoch_mean))
+    graph_bridge.append(int(1 if bridge else 0))
+    graph_epoch_std.append(float(epoch_std))
+    graph_num_layers.append(int(hidden))
+    graph_rate.append(float(rate))
+
     printf(f, "mean_epochs : " + str(epoch_mean) + ", std/epoch : " + str(epoch_std) + " , Failures : " + str(failure_counter))
     printf(f, "mean_valid_loss : " + str(val_loss_mean) + ", std/valid_loss : " + str(val_loss_std))
     printf(f, "mean_train_loss : " + str(train_loss_mean) + ", std/train_loss : " + str(train_loss_std))
@@ -144,43 +159,55 @@ def hyper_print(f, training, validation):
 
 
 def main():
+    # preparing data
+    # training validation contains both training and validation data
     data_training = [[[0, 0], [0, 1], [1, 0], [1, 1]], [[0], [1], [1], [0]]]
-    data_validation = [[[1, 0.1], [1, 0.9], [0.9, 0.9], [0.1, 0.9], [0.2, 0.8], [0.8, 0.9]],
-                       [[1], [0], [0], [1], [1], [0]]]
+    data_validation = [[[1, 0.1], [1, 0.9], [0.9, 0.9], [0.1, 0.9]],
+                       [[1], [0], [0], [1]]]
     training_validation = copy.deepcopy(data_training)
     training_validation[0] += data_validation[0]
     training_validation[1] += data_validation[1]
-    exp_counter = 0
+
+    exp_counter = 1
     f = open("ex2_output.txt", "w+")
     hyper_print(f, data_training, training_validation)
     printf(f, "")
+
     for bridge in [True, False]:
         for hidden in [2, 4]:
             for rate in [0.1, 0.01]:
                 experiment(f, data_training, training_validation, hidden, bridge, rate, exp_counter)
                 exp_counter += 1
                 printf(f, "-------------------------------------------------------------------------------------")
+    print("Printing output of hidden layer: ")
     experiment(f, data_training, training_validation, 1, True, 0.1, exp_counter)
     exp_counter += 1
     printf(f, "-------------------------------------------------------------------------------------")
-    printf(f, "OPTIONAL : TRY WITH 3 HIDDEN LAYERS : ")
+    printf(f, "OPTIONAL : TRY WITH 3 HIDDEN LAYERS (Q4) : ")
     experiment(f, data_training, training_validation, 3, False, 0.1, exp_counter)
-    printf(f, " Eden Dupont 204808596 Exercise 2 ")
+    printf(f, "\nEden Dupont 204808596 Exercise 2 ")
     f.close()
+    plot_graphs()
+
+
+def plot_graphs():
+
+    plt.subplot(3, 1, 1)
+    plt.title('Graphs solutions')
+    plt.plot(graph_mean_epoch, graph_num_layers, marker="8", linestyle='None')
+    plt.ylabel('num_hlayer')
+    plt.xlabel('mean_epochs')
+    plt.subplot(3, 1, 2)
+    plt.plot(graph_mean_epoch, graph_bridge, marker="8", linestyle='None')
+    plt.ylabel('bridge (1-True, 0-False)')
+    plt.xlabel('mean_epochs')
+    plt.subplot(3, 1, 3)
+    plt.plot(graph_epoch_std, graph_rate, marker="8", linestyle='None')
+    plt.ylabel('learning rate')
+    plt.xlabel('epochs_std')
+
+    plt.show()
 
 
 if __name__ == "__main__":
     main()
-
-
-def pretty_print(f, result, loss, k):
-    a = "\nK(Hidden neurons) = " + str(k)
-    b = "\nRESULTS: \n" + str(result)
-    c = "\nloss (RSS) : " + str(loss) + "\n\n------------------"
-
-    f.write(a)
-    f.write(b)
-    f.write(c)
-    print(a)
-    print(b)
-    print(c)

@@ -1,0 +1,86 @@
+MAX EPOCHS = 40000
+MIN_VALIDATION_LOSS = 0.2, MAX_MINIMAL_CHANGES = 10
+MINIMAL_CHANGE = 0.0001
+temperature = 0.5
+x_train = [[0, 0], [0, 1], [1, 0], [1, 1]]
+y_train = [[0], [1], [1], [0]]
+x_validation = [[0, 0], [0, 1], [1, 0], [1, 1], [1, 0.1], [1, 0.9], [0.9, 0.9], [0.1, 0.9]]
+y_validation = [[0], [1], [1], [0], [1], [0], [0], [1]]
+
+experiment 1: hidden: 2, bridge: True, learning_rate: 0.1
+mean_epochs : 1192.0, std/epoch : 167.10236383725996 , Failures : 0
+mean_valid_loss : 0.11295433, std/valid_loss : 0.031932976
+mean_train_loss : 0.036558367, std/train_loss : 0.0072768414
+-------------------------------------------------------------------------------------
+experiment 2: hidden: 2, bridge: True, learning_rate: 0.01
+mean_epochs : 8659.6, std/epoch : 4106.532094115423 , Failures : 0
+mean_valid_loss : 0.19998634, std/valid_loss : 1.1410517e-05
+mean_train_loss : 0.06496699, std/train_loss : 0.010003668
+-------------------------------------------------------------------------------------
+experiment 3: hidden: 4, bridge: True, learning_rate: 0.1
+mean_epochs : 982.3, std/epoch : 120.40020764101696 , Failures : 0
+mean_valid_loss : 0.083109885, std/valid_loss : 0.01461189
+mean_train_loss : 0.025874313, std/train_loss : 0.0027321451
+-------------------------------------------------------------------------------------
+experiment 4: hidden: 4, bridge: True, learning_rate: 0.01
+mean_epochs : 4572.6, std/epoch : 1043.007881082401 , Failures : 0
+mean_valid_loss : 0.1999672, std/valid_loss : 2.1326501e-05
+mean_train_loss : 0.06815448, std/train_loss : 0.008925335
+-------------------------------------------------------------------------------------
+experiment 5: hidden: 2, bridge: False, learning_rate: 0.1
+mean_epochs : 1222.8, std/epoch : 261.05547303207413 , Failures : 4
+mean_valid_loss : 0.088384114, std/valid_loss : 0.009649957
+mean_train_loss : 0.031610742, std/train_loss : 0.0051055294
+-------------------------------------------------------------------------------------
+experiment 6: hidden: 2, bridge: False, learning_rate: 0.01
+mean_epochs : 5997.2, std/epoch : 1322.1714563550372 , Failures : 8
+mean_valid_loss : 0.19997337, std/valid_loss : 1.9473768e-05
+mean_train_loss : 0.07385842, std/train_loss : 0.0048332503
+-------------------------------------------------------------------------------------
+experiment 7: hidden: 4, bridge: False, learning_rate: 0.1
+mean_epochs : 974.5, std/epoch : 72.35088112801391 , Failures : 0
+mean_valid_loss : 0.07952572, std/valid_loss : 0.005269143
+mean_train_loss : 0.025836274, std/train_loss : 0.0020046681
+-------------------------------------------------------------------------------------
+experiment 8: hidden: 4, bridge: False, learning_rate: 0.01
+mean_epochs : 7004.7, std/epoch : 6113.263548220377 , Failures : 2
+mean_valid_loss : 0.19995824, std/valid_loss : 1.8454297e-05
+mean_train_loss : 0.07087755, std/train_loss : 0.005635557
+-------------------------------------------------------------------------------------
+Printing output of hidden layer:
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[1.0], [1.0], [1.0], [1.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [0.0], [0.0], [0.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [0.0], [0.0], [0.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[1.0], [1.0], [1.0], [1.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [0.0], [0.0], [0.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [0.0], [0.0], [0.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [0.0], [0.0], [0.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [0.0], [0.0], [0.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [0.0], [0.0], [0.0]]
+x_input: [[0, 0], [0, 1], [1, 0], [1, 1]]
+hlayer_output: [[0.0], [3.798693981593715e-08], [3.7988609591366185e-08], [4.340760995091841e-08]]
+
+experiment 9: hidden: 1, bridge: True, learning_rate: 0.1
+mean_epochs : 1762.1, std/epoch : 296.7518997411811 , Failures : 0
+mean_valid_loss : 0.16377309, std/valid_loss : 0.026032882
+mean_train_loss : 0.056569375, std/train_loss : 0.014693745
+
+What can you tell about the hidden neuron? is it functioning as a logic gate?
+Answer : No, the values for all training inputs are 0. It's function is probably to negate too much positives that come directly from the input
+-------------------------------------------------------------------------------------
+OPTIONAL : TRY WITH 3 HIDDEN LAYERS (Q4) : 
+experiment 10: hidden: 3, bridge: False, learning_rate: 0.1
+mean_epochs : 1039.4, std/epoch : 144.3005197495837 , Failures : 0
+mean_valid_loss : 0.08191434, std/valid_loss : 0.0050395983
+mean_train_loss : 0.029458309, std/train_loss : 0.0055358494
+
+ Eden Dupont 204808596 Exercise 2 
